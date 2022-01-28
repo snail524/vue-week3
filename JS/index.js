@@ -36,8 +36,13 @@ const app = {
 
         },
         openModal(Modal,DataStatus,item){ // 開啟產品 Modal
-            
-            this.temp= JSON.parse(JSON.stringify(item));
+            // console.log(item);
+            if(item){
+                this.temp= JSON.parse(JSON.stringify(item));
+            }else{
+                this.temp={...item}
+            }
+            // this.temp= JSON.parse(JSON.stringify(item));
             this.temp.status= DataStatus ;  // 將資料狀態寫入
             if(Modal=='productMoal'){
                       // 將資料另外放入 temp
@@ -65,6 +70,7 @@ const app = {
           
             axios[method](`${method_url}`,{data: temp})  // 依照新增或編輯帶入相對應 方法與url
             .then(res=>{
+                alert('更新完成');
                 this.getProducts();   // 更新畫面
             })
             .catch(rej=>{
@@ -74,7 +80,7 @@ const app = {
             productModal.hide();
         },
         closeModal(ModalStatus){  // 關閉視窗，判斷是 商品視窗或刪除視窗
-            console.log(ModalStatus);
+            // console.log(ModalStatus);
             if(ModalStatus=="closeProductModal"){
                 this.temp= '',
                 productModal.hide();
@@ -92,6 +98,7 @@ const app = {
             .then(res=>{
                 // console.log(res);
                 deleteModal.hide();
+                alert('刪除完成');
                 this.getProducts();
             })
             .catch(rej=>{
