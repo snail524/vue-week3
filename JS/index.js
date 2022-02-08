@@ -40,7 +40,7 @@ const app = {
             if(item){
                 this.temp= JSON.parse(JSON.stringify(item));
             }else{
-                this.temp={...item}
+                this.temp={}
             }
             // this.temp= JSON.parse(JSON.stringify(item));
             this.temp.status= DataStatus ;  // 將資料狀態寫入
@@ -75,7 +75,7 @@ const app = {
             })
             .catch(rej=>{
                
-                alert(rej)
+                alert(rej.data.message)
             })
             productModal.hide();
         },
